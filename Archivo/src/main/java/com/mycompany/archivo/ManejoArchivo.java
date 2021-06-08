@@ -5,10 +5,13 @@
  */
 package com.mycompany.archivo;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,6 +19,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import static javax.swing.JFileChooser.*;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -106,6 +110,38 @@ public class ManejoArchivo {
             bw.write(contenido);
             bw.close();
         } catch (IOException e) {
+        }
+    }
+
+    public void leerArchivo() throws FileNotFoundException, IOException {
+//        JFileChooser choser = new JFileChooser();
+//        choser.addChoosableFileFilter(new  FileNameExtensionFilter("documento Luis", "txt"));
+//        choser.setAcceptAllFileFilterUsed(false);
+//        int selecionado = choser.showOpenDialog(null);
+//        File archivo = choser.getSelectedFile();
+//        FileReader leerArchivo = new FileReader(archivo.getAbsoluteFile());
+//        BufferedReader leyendo = new BufferedReader(leerArchivo);//para leer linea por linea
+//        String linea = "";
+//        while (leyendo.ready()) {
+//            linea = leyendo.readLine();
+//            System.out.println("Cada linea");
+//            System.out.println(linea);
+//            
+//        }
+
+        /**
+         * CREAR CARPETA PRUEBA
+         */
+        JFileChooser choser = new JFileChooser();
+        String nameCarpeta = JOptionPane.showInputDialog(null, "Ingrese el nombre de la carptea", "CARPETA", JOptionPane.INFORMATION_MESSAGE);
+
+        File carpeta = new File("C:\\Users\\Usuario\\OneDrive\\Documentos\\" + nameCarpeta);
+        if (carpeta.mkdir()) {
+            System.out.println("creado");
+            System.out.println(carpeta.getAbsolutePath());
+        } else {
+            System.out.println("no creado");
+            System.out.println(carpeta.getAbsolutePath());
         }
     }
 }
