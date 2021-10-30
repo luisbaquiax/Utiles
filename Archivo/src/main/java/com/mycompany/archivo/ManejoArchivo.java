@@ -40,7 +40,7 @@ public class ManejoArchivo {
         if (seleccionado == APPROVE_OPTION) {
             return (choser.getSelectedFile().getAbsolutePath());
         }
-        return null;
+        return "";
     }
 
     public String pathChoserOpen() {
@@ -51,7 +51,7 @@ public class ManejoArchivo {
         if (seleccionado == APPROVE_OPTION) {
             return (choser.getSelectedFile().getAbsolutePath());
         }
-        return null;
+        return "";
     }
 
     public void escribirObjeto(String filepath, Object persona) {

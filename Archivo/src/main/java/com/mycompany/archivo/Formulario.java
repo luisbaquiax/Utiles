@@ -5,6 +5,11 @@
  */
 package com.mycompany.archivo;
 
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +33,7 @@ public class Formulario extends javax.swing.JFrame {
         initComponents();
         this.manejorArchivo = new ManejoArchivo();
         personas = new ArrayList();
+        establecerFocus();
     }
 
     /**
@@ -305,6 +311,33 @@ public class Formulario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonLeerArchivoActionPerformed
 
+    private void establecerFocus() {
+        KeyListener hola = new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent ke) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent ke) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent ke) {
+                if (ke.getKeyCode() == 10) {
+                    if (ke.getComponent().equals(jTextField1)) {
+                        jTextField2.requestFocus();
+                    } else if (ke.getComponent().equals(jTextField2)) {
+                        jTextField3.requestFocus();
+                    } else if (ke.getComponent().equals(jTextField3)) {
+                        jTextField1.requestFocus();
+                    }
+                }
+            }
+        };
+        jTextField1.addKeyListener(hola);
+        jTextField2.addKeyListener(hola);
+        jTextField3.addKeyListener(hola);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonEscribir;
