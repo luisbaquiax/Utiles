@@ -25,6 +25,7 @@ public class Formulario extends javax.swing.JFrame {
 
     ManejoArchivo manejorArchivo;
     List<Persona> personas;
+    String pahtLIsta = "";
 
     /**
      * Creates new form Formulario
@@ -76,14 +77,14 @@ public class Formulario extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Acciones sobre archivo"));
 
-        jButtonEscribir.setText("Escribir");
+        jButtonEscribir.setText("Escribir objeto");
         jButtonEscribir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEscribirActionPerformed(evt);
             }
         });
 
-        jButtonLeer.setText("LEER");
+        jButtonLeer.setText("Leer objeto");
         jButtonLeer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLeerActionPerformed(evt);
@@ -130,42 +131,38 @@ public class Formulario extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonAgregar)
-                        .addGap(18, 18, 18))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonLeerArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonGuardarListado)
-                        .addGap(28, 28, 28)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonEscribir)
-                        .addGap(25, 25, 25)
-                        .addComponent(jButtonLeer)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(jButtonGuardarListado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonLimiar))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonLeeListado)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonEscribir, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                            .addComponent(jButtonLeeListado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonLeerArchivo)))
-                .addGap(21, 21, 21))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonLeer, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                            .addComponent(jButtonLimiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAgregar)
                     .addComponent(jButtonEscribir)
-                    .addComponent(jButtonLeer)
-                    .addComponent(jButtonLimiar)
-                    .addComponent(jButtonAgregar))
+                    .addComponent(jButtonLeer))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGuardarListado)
                     .addComponent(jButtonLeeListado)
-                    .addComponent(jButtonLeerArchivo))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(jButtonLimiar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonLeerArchivo))
         );
 
         jTextArea1.setColumns(20);
@@ -195,7 +192,7 @@ public class Formulario extends javax.swing.JFrame {
                 .addComponent(jScrollPane1)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(113, Short.MAX_VALUE)
+                .addContainerGap(104, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68))
         );
@@ -243,8 +240,11 @@ public class Formulario extends javax.swing.JFrame {
         // TODO add your handling code here:String path = choser.getSelectedFile().getAbsolutePath();
         //String path = "C:\\Users\\Usuario\\OneDrive\\Documentos\\veamos";
         try {
+             if(pahtLIsta.equals("")){
+                pahtLIsta = manejorArchivo.pathChoserSave() + ".txt";
+            }
             Persona persona = new Persona(this.jTextField1.getText(), this.jTextField2.getText(), Integer.parseInt(this.jTextField3.getText()));
-            manejorArchivo.escribirObjeto(manejorArchivo.pathChoserSave() + ".txt", persona);
+            manejorArchivo.escribirObjeto(pahtLIsta, persona);
             personas.add(persona);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Escribe el nombre de tu archivo");
@@ -255,6 +255,9 @@ public class Formulario extends javax.swing.JFrame {
     private void jButtonLeerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLeerActionPerformed
         // TODO add your handling code here:
         try {
+             if(pahtLIsta.equals("")){
+                pahtLIsta = manejorArchivo.pathChoserOpen();
+            }
             Persona persona = (Persona) manejorArchivo.leerObejtodelAarchivo(manejorArchivo.pathChoserOpen());
             this.jTextField1.setText(persona.getNombre());
             this.jTextField2.setText(persona.getApellidos());
@@ -275,7 +278,10 @@ public class Formulario extends javax.swing.JFrame {
     private void jButtonGuardarListadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarListadoActionPerformed
         // TODO add your handling code here:
         try {
-            manejorArchivo.escribirObjeto(manejorArchivo.pathChoserSave() + ".txt", personas);
+            if(pahtLIsta.equals("")){
+                pahtLIsta = manejorArchivo.pathChoserSave() + ".txt";
+            }
+            manejorArchivo.escribirObjeto(pahtLIsta, personas);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al guardar");
         }
@@ -285,11 +291,13 @@ public class Formulario extends javax.swing.JFrame {
     private void jButtonLeeListadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLeeListadoActionPerformed
         // TODO add your handling code here:
         try {
+            if(pahtLIsta.equals("")){
+                pahtLIsta = manejorArchivo.pathChoserOpen();
+            }
             personas = (ArrayList<Persona>) manejorArchivo.personas(manejorArchivo.pathChoserOpen());
             for (Persona persona : personas) {
                 System.out.println(persona.toString());
             }
-//            this.setVisible(false);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ha ocurrido un error");
         }
