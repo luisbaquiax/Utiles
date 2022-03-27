@@ -22,6 +22,8 @@
                     <archive>
                         <index>true</index>
                         <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
                             <mainClass>baquiax.ejecutable.Main</mainClass>
                         </manifest>
                     </archive>
