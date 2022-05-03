@@ -39,4 +39,17 @@ public class Utiles {
         button.setIcon(new ImageIcon(icono1.getImage().getScaledInstance(button.getSize().width,
                 button.getSize().height, Image.SCALE_SMOOTH)));
     }
+
+    /**
+     * SE DEBE TENER UNA CARPETA LLAMADA << RESOURCER >> AL MISMO NIVEL QUE LA
+     * CARPETA << JAVA >>
+     *
+     * @param label
+     * @param ruta
+     */
+    public void ponerIconoLabel1(JLabel label, String ruta) {
+        ImageIcon icono1 = new ImageIcon(getClass().getResource(ruta));
+        label.setIcon(new ImageIcon(icono1.getImage().getScaledInstance(
+                label.getSize().width, label.getSize().height, Image.SCALE_SMOOTH)));
+    }
 }
